@@ -1,0 +1,58 @@
+﻿@model IEnumerable<MVC_School.Models.CourseHasStudent>
+
+@{
+    ViewData["Title"] = "Grades";
+    Layout = "~/Views/Shared/_LayoutStudent.cshtml";
+    string flag = "";
+}
+
+<h1>Grades by semester</h1>
+
+@foreach (var semester in Model)
+{
+    if (!flag.Equals(semester.CourseIdCourseNavigation.CourseSemester))
+    {
+        <h3>@Html.DisplayFor(modelItem => semester.CourseIdCourseNavigation.CourseSemester)° semester</h3>
+
+        <table class="table">
+            <thead>
+                <tr align="center">
+                    <th>
+                        @Html.DisplayNameFor(model => model.CourseIdCourseNavigation.CourseTitle)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CourseIdCourseNavigation.ProfessorsAfmNavigation.FullName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.GradeCourseStudent)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    @if (semester.CourseIdCourseNavigation.CourseSemester.Equals(item.CourseIdCourseNavigation.CourseSemester))
+                    {
+                        <tr align="center">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CourseIdCourseNavigation.CourseTitle)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CourseIdCourseNavigation.ProfessorsAfmNavigation.FullName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GradeCourseStudent)
+                                @if (item.GradeCourseStudent.Equals(null))
+                                {
+                                    ViewData["null"] = "-";
+                                    @ViewData["null"]
+                                }
+                            </td>
+                        </tr>
+                        flag = item.CourseIdCourseNavigation.CourseSemester;
+                    }                    
+                }
+            </tbody>
+        </table>
+    }    
+}

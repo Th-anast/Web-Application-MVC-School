@@ -1,0 +1,38 @@
+﻿@model MVC_School.Models.Course
+
+@{
+    ViewData["Title"] = "Assign Course";
+    Layout = "~/Views/Shared/_LayoutSecretary.cshtml";
+}
+
+<h1>Assigning a course to a teacher</h1>
+
+<h4>Course</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="assignCourse">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CourseTitle " class="control-label"></label>
+                <select asp-for="IdCourse" class="form-control" asp-items="ViewBag.IdCourse"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProfessorsAfmNavigation.Department" class="control-label"></label>
+                <input asp-for="ProfessorsAfmNavigation.Department" class="form-control" value="@ViewData["Department"]" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="ProfessorsAfmNavigation.FullName" class="control-label"></label>
+                <select asp-for="ProfessorsAfm" class="form-control" asp-items="ViewBag.ProfessorsAfm"></select>                
+            </div>
+            <br>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br>
+<div>
+    <a asp-controller="Home" asp-action="Secretary" asp-route-id="@ViewData["Phone_Number"]">Back to Home Page</a>
+</div>

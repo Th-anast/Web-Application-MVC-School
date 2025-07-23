@@ -1,0 +1,45 @@
+﻿@model IEnumerable<MVC_School.Models.CourseHasStudent>
+
+@{    
+    ViewData["Title"] = "Grades";
+    Layout = "~/Views/Shared/_LayoutProfessor.cshtml";
+}
+
+<h1>Grades by title</h1>
+
+<table class="table">
+    <thead>
+        <tr align="center">
+            <th>
+                @Html.DisplayNameFor(model => model.CourseIdCourseNavigation.CourseTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseIdCourseNavigation.CourseSemester)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentsRegistrationNumberNavigation.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GradeCourseStudent)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr align="center">
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseIdCourseNavigation.CourseTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseIdCourseNavigation.CourseSemester)° semester
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentsRegistrationNumberNavigation.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GradeCourseStudent)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

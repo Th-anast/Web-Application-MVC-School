@@ -1,0 +1,45 @@
+﻿@model IEnumerable<MVC_School.Models.Course>
+
+@{
+    ViewData["Title"] = "Courses";
+    Layout = "~/Views/Shared/_LayoutSecretary.cshtml";
+}
+
+<h1>Courses</h1>
+
+<table class="table">
+    <thead>
+        <tr align="center">
+            <th>
+                @Html.DisplayNameFor(model => model.CourseTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseSemester)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProfessorsAfmNavigation.FullName)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr align="center">
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseSemester)° semester
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProfessorsAfmNavigation.FullName)
+                    @if (item.ProfessorsAfm.Equals(null))
+                    {
+                        ViewData["null"] = "-";
+                        @ViewData["null"]
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

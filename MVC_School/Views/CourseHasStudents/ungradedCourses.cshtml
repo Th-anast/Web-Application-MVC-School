@@ -1,0 +1,50 @@
+﻿@model IEnumerable<MVC_School.Models.CourseHasStudent>
+
+@{
+    ViewData["Title"] = "Ungraded Courses";
+    Layout = "~/Views/Shared/_LayoutProfessor.cshtml";
+    string flag = "";
+}
+<h1>Select course for grade</h1>
+<br>
+@foreach (var semester in Model)
+{
+    if (!flag.Equals(semester.CourseIdCourseNavigation.CourseSemester))
+    {
+        <h3>@Html.DisplayFor(modelItem => semester.CourseIdCourseNavigation.CourseSemester)° semester</h3>
+
+        <table class="table">
+            <thead>
+                <tr align="center">
+                    <th>
+                        @Html.DisplayNameFor(model => model.CourseIdCourseNavigation.CourseTitle)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StudentsRegistrationNumberNavigation.FullName)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    @if (semester.CourseIdCourseNavigation.CourseSemester.Equals(item.CourseIdCourseNavigation.CourseSemester))
+                    {
+                        <tr align="center">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CourseIdCourseNavigation.CourseTitle)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StudentsRegistrationNumberNavigation.FullName)
+                            </td>
+                            <td>
+                                <a asp-action="insertGrade" asp-route-id="@item.Id">Insert Grade</a>
+                            </td>
+                        </tr>
+                        flag = item.CourseIdCourseNavigation.CourseSemester;
+                    }  
+                }
+            </tbody>
+        </table>
+    }
+}
